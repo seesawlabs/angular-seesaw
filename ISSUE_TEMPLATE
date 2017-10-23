@@ -1,0 +1,45 @@
+<!-- Seesaw Labs - Issues Template v1.2 -->
+
+## Issue Workflow
+<!-- This section is to help the Product Management team ensure the issue is properly documented before handing off to development. -->
+
+- [x] Issue ready for Project Manager Review by @eolexe @damengilland
+- [ ] Issue ready for Estimation
+- [ ] Issue ready for Prioritization & Approval by @jefftulsa
+
+## User Story
+
+As a (PERSONA), I (NEED OR WANT) to (ABILITY OR ACTION), in order to (BENEFIT).
+
+## Steps to Reproduce / Test
+
+As a (PERSONA / SPECIFIC USER) on (DEVICE / BROWSER) follow these steps...
+
+1. None identified at this time.
+
+## Annotated Wireframes / Screenshots
+<!-- Are there any UX wireframes or Visual Design components related to this Issue? -->
+
+
+
+## Acceptance Criteria / Expected Behavior
+<!-- Do any of the form fields have error checking or are any of the form fields required? Is there any other business logic or other criteria needed that may not be apparent in the wireframe? -->
+
+* ...
+
+## Special Testing Needs
+<!-- Do we need to pull in any special test data, or let this issue sit for a while, or run some 3rd party service before testing this issue? -->
+
+- [x] None identified at this time.
+
+## Dependencies
+<!-- Are there other GitHub Issues or other tasks that need to be completed before work begins? -->
+
+- [x] None identified at this time.
+
+## Other Notes / Files
+<!-- Original emails from the client? Links to relevant Slack Conversations? Documents? -->
+
+# Proposed Task
+
+- [ ] ...

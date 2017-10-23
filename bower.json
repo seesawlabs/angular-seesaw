@@ -1,0 +1,35 @@
+{
+  "name": "angular-seesawlabs",
+  "version": "1.0.0",
+  "homepage": "https://github.com/seesawlabs/angular-seesaw",
+  "authors": [
+    "Jose Calderon <jkalderonkiros@gmail.com>"
+  ],
+  "description": "SeeSaw Labs AngularJS SDK",
+  "main": "index.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "seesawlabs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "coverage",
+    "lib",
+    "gulpfile.coffee",
+    "karma.conf.coffee",
+    "package.json",
+    ".gitignore"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-mocks": "~1.4.7"
+  }
+}
