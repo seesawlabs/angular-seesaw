@@ -1,6 +1,6 @@
 {
   "name": "angular-seesawlabs",
-  "version": "3.4.0",
+  "version": "1.0.0",
   "description": "Seesaw Labs AngularJS SDK",
   "main": "index.js",
   "scripts": {
