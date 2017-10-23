@@ -91,6 +91,10 @@ gulp.task 'prepare-testapp', ->
     port: 3333
   return
 
+gulp.task 'views', ->
+  gulp.src ['./lib/views/**']
+  .pipe gulp.dest('./dist/views')
+
 gulp.task 'bump', ->
   gulp.src ['./bower.json','./package.json']
     .pipe plugins.bump( type: 'patch' )
@@ -99,6 +103,7 @@ gulp.task 'bump', ->
 gulp.task 'dist', ->
   gulp.start 'bump'
   gulp.start 'coffee'
+  gulp.start 'views'
 
 gulp.task 'default', ->
   gulp.start 'lint'
