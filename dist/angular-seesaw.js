@@ -16,9 +16,13 @@
       transclude: true,
       replace: true,
       link: function(scope, element, attrs, ctrl, transclude) {
-        var attrsStr, template, templateEl;
+        var attributes, attrsStr, template, templateEl;
+        attributes = ['submit', 'button', 'reset'];
         attrsStr = "";
         attrs['type'] = attrs.type || 'button';
+        if (!attributes.includes(attrs.type)) {
+          attrs['type'] = 'button';
+        }
         angular.forEach(Object.keys(attrs), function(val, key) {
           if (typeof attrs[val] === 'string') {
             return attrsStr += (seesawCommon.camelToDashHyphen(val)) + "=\"" + attrs[val] + "\" ";
