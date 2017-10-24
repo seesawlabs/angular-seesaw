@@ -1,30 +1,19 @@
 'use strict'
 
 do ->
-  sslButtonDirective = ($compile)->
-    # "camel" case to dash hyphen
-    fixCase = (input)->
-      # if it has underscores first convert to Camel Case
-      if input.match(/_/g)
-        input = input.replace /_(.)/g, (v, a)->a.toUpperCase()
-
-      # If it's all capitalized, first make everything lowercase
-      if input.match(/^[A-Z]+$/g)
-        input = input.toLowerCase()
-
-      result = input.replace(/([A-Z])/g, '-$1')
-      result.toLowerCase()
-
+  sslButtonDirective = ($compile, seesawCommon)->
     transclude: true
     replace: true
     link: (scope, element, attrs, ctrl, transclude)->
+      attributes = ['submit', 'button', 'reset']
       attrsStr = ""
       attrs['type'] = attrs.type || 'button'
+      attrs['type'] = 'button' if not attributes.includes(attrs.type)
       angular.forEach Object.keys(attrs), (val, key)->
-        attrsStr += "#{fixCase(val)}=\"#{attrs[val]}\" " if typeof attrs[val] is 'string'
+        attrsStr += "#{seesawCommon.camelToDashHyphen(val)}=\"#{attrs[val]}\" " if typeof attrs[val] is 'string'
 
       template = """
-      <button #{attrsStr}>
+      <button #{attrsStr} class="ssl-button">
         <placeholder></placeholder>
       </button>"""
 
@@ -36,7 +25,7 @@ do ->
         $compile(templateEl) scope, (clonedTemplate) ->
           element.replaceWith(clonedTemplate)
 
-  sslButtonDirective.$inject = ['$compile']
+  sslButtonDirective.$inject = ['$compile', 'seesawCommon']
 
   angular.module 'ngSeesawLabs'
     .directive 'seesawButton', sslButtonDirective
