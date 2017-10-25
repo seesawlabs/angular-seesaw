@@ -44,6 +44,48 @@
 })();
 
 'use strict';
+(function() {
+  var sslFormDirective;
+  sslFormDirective = function() {
+    return {
+      templateUrl: 'modules/seesawlabs/views/directives/ssl-form.view.html',
+      transclude: true,
+      replace: true,
+      link: {
+        pre: function(scope, element, attrs) {
+          return scope.parentForm = attrs.name;
+        }
+      }
+    };
+  };
+  sslFormDirective.$inject = [];
+  return angular.module('ngSeesawLabs').directive('seesawForm', sslFormDirective);
+})();
+
+'use strict';
+(function() {
+  var sslInputItemDirective;
+  sslInputItemDirective = function() {
+    return {
+      templateUrl: 'modules/seesawlabs/views/directives/ssl-input-item.view.html',
+      transclude: true,
+      replace: true,
+      scope: {
+        label: '@',
+        ref: '@'
+      },
+      link: {
+        pre: function(scope, element, attrs) {
+          return scope.parentForm = scope.$parent[scope.$parent.parentForm];
+        }
+      }
+    };
+  };
+  sslInputItemDirective.$inject = [];
+  return angular.module('ngSeesawLabs').directive('seesawInputItem', sslInputItemDirective);
+})();
+
+'use strict';
 (function(angular) {
   var seesawCommon;
   seesawCommon = function() {
