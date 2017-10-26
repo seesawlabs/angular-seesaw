@@ -8,6 +8,15 @@ do ->
     link:
       pre: (scope, element, attrs)->
         scope.parentForm = attrs.name
+        # set up event handler on the form element
+        element.on 'submit', (e)->
+          # find the first invalid element
+          firstInvalid = element[0].querySelector('.ng-invalid')
+          # if we find one, set focus
+          if (firstInvalid)
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            firstInvalid.focus()
 
   sslFormDirective.$inject = []
 
