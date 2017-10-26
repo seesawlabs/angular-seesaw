@@ -23,6 +23,9 @@
         if (!attributes.includes(attrs.type)) {
           attrs['type'] = 'button';
         }
+        if (attrs['type'] === 'submit') {
+          attrs['ngClick'] = "onSubmit()";
+        }
         angular.forEach(Object.keys(attrs), function(val, key) {
           if (typeof attrs[val] === 'string') {
             return attrsStr += (seesawCommon.camelToDashHyphen(val)) + "=\"" + attrs[val] + "\" ";
@@ -30,12 +33,15 @@
         });
         template = "<button " + attrsStr + " class=\"ssl-button\">\n  <placeholder></placeholder>\n</button>";
         templateEl = angular.element(template);
-        return transclude(scope, function(clonedContent) {
+        transclude(scope, function(clonedContent) {
           templateEl.find("placeholder").replaceWith(clonedContent);
           return $compile(templateEl)(scope, function(clonedTemplate) {
             return element.replaceWith(clonedTemplate);
           });
         });
+        return scope.onSubmit = function() {
+          return scope.$parent[scope.$parent.parentForm].$submitted = true;
+        };
       }
     };
   };
@@ -53,7 +59,16 @@
       replace: true,
       link: {
         pre: function(scope, element, attrs) {
-          return scope.parentForm = attrs.name;
+          scope.parentForm = attrs.name;
+          return element.on('submit', function(e) {
+            var firstInvalid;
+            firstInvalid = element[0].querySelector('.ng-invalid');
+            if (firstInvalid) {
+              e.stopImmediatePropagation();
+              e.preventDefault();
+              return firstInvalid.focus();
+            }
+          });
         }
       }
     };
@@ -76,7 +91,10 @@
       },
       link: {
         pre: function(scope, element, attrs) {
-          return scope.parentForm = scope.$parent[scope.$parent.parentForm];
+          scope.parentForm = scope.$parent[scope.$parent.parentForm];
+          return scope.isEmpty = function(obj) {
+            return !obj || Object.keys(obj).length === 0;
+          };
         }
       }
     };
