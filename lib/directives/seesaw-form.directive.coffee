@@ -7,7 +7,6 @@ do ->
     replace: true
     link:
       pre: (scope, element, attrs)->
-        attrs.ngSubmit = "#{attrs.name}.$valid && #{attrs.ngSubmit}"
         scope.parentForm = attrs.name
         # set up event handler on the form element
         element.on 'submit', (e)->
