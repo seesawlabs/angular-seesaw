@@ -9,6 +9,10 @@ do ->
       attrsStr = ""
       attrs['type'] = attrs.type || 'button'
       attrs['type'] = 'button' if not attributes.includes(attrs.type)
+
+      if attrs['type'] is 'submit'
+        attrs['ngClick'] = "onSubmit()"
+
       angular.forEach Object.keys(attrs), (val, key)->
         attrsStr += "#{seesawCommon.camelToDashHyphen(val)}=\"#{attrs[val]}\" " if typeof attrs[val] is 'string'
 
@@ -24,6 +28,9 @@ do ->
 
         $compile(templateEl) scope, (clonedTemplate) ->
           element.replaceWith(clonedTemplate)
+
+      scope.onSubmit = ->
+        scope.$parent[scope.$parent.parentForm].$submitted = true
 
   sslButtonDirective.$inject = ['$compile', 'seesawCommon']
 
