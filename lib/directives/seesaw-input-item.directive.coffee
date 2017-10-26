@@ -11,6 +11,8 @@ do ->
     link:
       pre: (scope, element, attrs)->
         scope.parentForm = scope.$parent[scope.$parent.parentForm]
+        scope.isEmpty = (obj)->
+          (not obj || Object.keys(obj).length is 0)
 
   sslInputItemDirective.$inject = []
 
