@@ -51,6 +51,50 @@
 
 'use strict';
 (function() {
+  var sslDatepickerDirective;
+  sslDatepickerDirective = function($compile, seesawCommon) {
+    return {
+      replace: true,
+      require: ['ngModel'],
+      link: {
+        pre: function(scope, element, attrs) {
+          var attrsStr, template, templateEl;
+          attrsStr = "";
+          angular.forEach(Object.keys(attrs), function(val, key) {
+            if (typeof attrs[val] === 'string') {
+              return attrsStr += (seesawCommon.camelToDashHyphen(val)) + "=\"" + attrs[val] + "\" ";
+            }
+          });
+          template = "<div ng-class=\"{ 'fg-line': true, 'fg-toggled': " + attrs.name + "Flag == true }\">\n  <input ng-click=\"" + attrs.name + "Flag = true;\" is-open=\"" + attrs.name + "Flag\" uib-datepicker-popup=\"MMM dd, yyyy\" show-weeks=\"false\" type=\"text\" close-text=\"Close\" " + attrsStr + " />\n</div>";
+          templateEl = angular.element(template);
+          return $compile(templateEl)(scope, function(clonedTemplate) {
+            return element.replaceWith(clonedTemplate);
+          });
+        },
+        post: function(scope, element, attrs, ctrls) {
+          var ngModel;
+          ngModel = ctrls[0];
+          return ngModel.$formatters.push(function(modelValue) {
+            var dt;
+            if (!modelValue) {
+              return void 0;
+            }
+            dt = new Date(modelValue);
+            dt.setMinutes(dt.getMinutes() + dt.getTimezoneOffset());
+            dt.setMinutes((dt.getMinutes() + (dt.getHours() * 60)) * -1);
+            ngModel.$setViewValue(dt);
+            return dt;
+          });
+        }
+      }
+    };
+  };
+  sslDatepickerDirective.$inject = ['$compile', 'seesawCommon'];
+  return angular.module('ngSeesawLabs').directive('seesawDatepicker', sslDatepickerDirective);
+})();
+
+'use strict';
+(function() {
   var sslFormDirective;
   sslFormDirective = function() {
     return {
