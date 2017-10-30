@@ -11,7 +11,7 @@ do ->
           attrsStr += "#{seesawCommon.camelToDashHyphen(val)}=\"#{attrs[val]}\" " if typeof attrs[val] is 'string'
 
         template = """
-          <div ng-class="{ 'fg-line': true, 'fg-toggled': #{attrs.name}Flag == true }">
+          <div class="ssl-datepicker" ng-class="{ 'fg-line': true, 'fg-toggled': #{attrs.name}Flag == true }">
             <input ng-click="#{attrs.name}Flag = true;" is-open="#{attrs.name}Flag" uib-datepicker-popup="MMM dd, yyyy" show-weeks="false" type="text" close-text="Close" #{attrsStr} />
           </div>"""
 
