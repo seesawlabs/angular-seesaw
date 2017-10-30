@@ -9,6 +9,30 @@
 })(angular);
 
 'use strict';
+(function(angular) {
+  var seesawCommon;
+  seesawCommon = function() {
+    return {
+      camelToDashHyphen: function(input) {
+        var result;
+        if (input.match(/_/g)) {
+          input = input.replace(/_(.)/g, function(v, a) {
+            return a.toUpperCase();
+          });
+        }
+        if (input.match(/^[A-Z]+$/g)) {
+          input = input.toLowerCase();
+        }
+        result = input.replace(/([A-Z])/g, '-$1');
+        return result.toLowerCase();
+      }
+    };
+  };
+  seesawCommon.$inject = [];
+  return angular.module('ngSeesawLabs').factory('seesawCommon', seesawCommon);
+})(angular);
+
+'use strict';
 (function() {
   var sslButtonDirective;
   sslButtonDirective = function($compile, seesawCommon) {
@@ -131,7 +155,10 @@
       replace: true,
       scope: {
         label: '@',
-        ref: '@'
+        ref: '@',
+        patternMessage: '@',
+        minMessage: '@',
+        maxMessage: '@'
       },
       link: {
         pre: function(scope, element, attrs) {
@@ -146,27 +173,3 @@
   sslInputItemDirective.$inject = [];
   return angular.module('ngSeesawLabs').directive('seesawInputItem', sslInputItemDirective);
 })();
-
-'use strict';
-(function(angular) {
-  var seesawCommon;
-  seesawCommon = function() {
-    return {
-      camelToDashHyphen: function(input) {
-        var result;
-        if (input.match(/_/g)) {
-          input = input.replace(/_(.)/g, function(v, a) {
-            return a.toUpperCase();
-          });
-        }
-        if (input.match(/^[A-Z]+$/g)) {
-          input = input.toLowerCase();
-        }
-        result = input.replace(/([A-Z])/g, '-$1');
-        return result.toLowerCase();
-      }
-    };
-  };
-  seesawCommon.$inject = [];
-  return angular.module('ngSeesawLabs').factory('seesawCommon', seesawCommon);
-})(angular);
