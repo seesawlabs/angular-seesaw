@@ -8,6 +8,9 @@ do ->
     scope:
       label: '@'
       ref: '@'
+      patternMessage: '@'
+      minMessage: '@'
+      maxMessage: '@'
     link:
       pre: (scope, element, attrs)->
         scope.parentForm = scope.$parent[scope.$parent.parentForm]
