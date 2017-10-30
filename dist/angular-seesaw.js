@@ -9,30 +9,6 @@
 })(angular);
 
 'use strict';
-(function(angular) {
-  var seesawCommon;
-  seesawCommon = function() {
-    return {
-      camelToDashHyphen: function(input) {
-        var result;
-        if (input.match(/_/g)) {
-          input = input.replace(/_(.)/g, function(v, a) {
-            return a.toUpperCase();
-          });
-        }
-        if (input.match(/^[A-Z]+$/g)) {
-          input = input.toLowerCase();
-        }
-        result = input.replace(/([A-Z])/g, '-$1');
-        return result.toLowerCase();
-      }
-    };
-  };
-  seesawCommon.$inject = [];
-  return angular.module('ngSeesawLabs').factory('seesawCommon', seesawCommon);
-})(angular);
-
-'use strict';
 (function() {
   var sslButtonDirective;
   sslButtonDirective = function($compile, seesawCommon) {
@@ -89,7 +65,7 @@
               return attrsStr += (seesawCommon.camelToDashHyphen(val)) + "=\"" + attrs[val] + "\" ";
             }
           });
-          template = "<div ng-class=\"{ 'fg-line': true, 'fg-toggled': " + attrs.name + "Flag == true }\">\n  <input ng-click=\"" + attrs.name + "Flag = true;\" is-open=\"" + attrs.name + "Flag\" uib-datepicker-popup=\"MMM dd, yyyy\" show-weeks=\"false\" type=\"text\" close-text=\"Close\" " + attrsStr + " />\n</div>";
+          template = "<div class=\"ssl-datepicker\" ng-class=\"{ 'fg-line': true, 'fg-toggled': " + attrs.name + "Flag == true }\">\n  <input ng-click=\"" + attrs.name + "Flag = true;\" is-open=\"" + attrs.name + "Flag\" uib-datepicker-popup=\"MMM dd, yyyy\" show-weeks=\"false\" type=\"text\" close-text=\"Close\" " + attrsStr + " />\n</div>";
           templateEl = angular.element(template);
           return $compile(templateEl)(scope, function(clonedTemplate) {
             return element.replaceWith(clonedTemplate);
@@ -173,3 +149,27 @@
   sslInputItemDirective.$inject = [];
   return angular.module('ngSeesawLabs').directive('seesawInputItem', sslInputItemDirective);
 })();
+
+'use strict';
+(function(angular) {
+  var seesawCommon;
+  seesawCommon = function() {
+    return {
+      camelToDashHyphen: function(input) {
+        var result;
+        if (input.match(/_/g)) {
+          input = input.replace(/_(.)/g, function(v, a) {
+            return a.toUpperCase();
+          });
+        }
+        if (input.match(/^[A-Z]+$/g)) {
+          input = input.toLowerCase();
+        }
+        result = input.replace(/([A-Z])/g, '-$1');
+        return result.toLowerCase();
+      }
+    };
+  };
+  seesawCommon.$inject = [];
+  return angular.module('ngSeesawLabs').factory('seesawCommon', seesawCommon);
+})(angular);
