@@ -132,9 +132,15 @@
       scope: {
         label: '@',
         ref: '@',
+        requiredMessage: '@',
         patternMessage: '@',
         minMessage: '@',
-        maxMessage: '@'
+        maxMessage: '@',
+        maxlengthMessage: '@',
+        minlengthMessage: '@',
+        emailMessage: '@',
+        dateMessage: '@',
+        numberMessage: '@'
       },
       link: {
         pre: function(scope, element, attrs) {
