@@ -17,6 +17,9 @@ do ->
             e.stopImmediatePropagation();
             e.preventDefault();
             firstInvalid.focus()
+            element.addClass('submitted')
+            return
+
 
   sslFormDirective.$inject = []
 
