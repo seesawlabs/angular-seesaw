@@ -1,7 +1,7 @@
 'use strict'
 
 do ->
-  sslFormDirective = ->
+  sslFormDirective = ($compile)->
     templateUrl: 'modules/seesawlabs/views/directives/ssl-form.view.html'
     transclude: true
     replace: true
@@ -17,8 +17,11 @@ do ->
             e.stopImmediatePropagation();
             e.preventDefault();
             firstInvalid.focus()
+            element.addClass('submitted')
+            return
 
-  sslFormDirective.$inject = []
+
+  sslFormDirective.$inject = ['$compile']
 
   angular.module 'ngSeesawLabs'
     .directive 'seesawForm', sslFormDirective
