@@ -11,41 +11,26 @@
 'use strict';
 (function() {
   var sslButtonDirective;
-  sslButtonDirective = function($compile, seesawCommon) {
+  sslButtonDirective = function() {
     return {
+      templateUrl: 'modules/seesawlabs/views/directives/ssl-button.view.html',
       transclude: true,
       replace: true,
-      link: function(scope, element, attrs, ctrl, transclude) {
-        var attributes, attrsStr, template, templateEl;
-        attributes = ['submit', 'button', 'reset'];
-        attrsStr = "";
-        attrs['type'] = attrs.type || 'button';
-        if (!attributes.includes(attrs.type)) {
-          attrs['type'] = 'button';
-        }
-        if (attrs['type'] === 'submit') {
-          attrs['ngClick'] = "onSubmit()";
-        }
-        angular.forEach(Object.keys(attrs), function(val, key) {
-          if (typeof attrs[val] === 'string') {
-            return attrsStr += (seesawCommon.camelToDashHyphen(val)) + "=\"" + attrs[val] + "\" ";
+      link: {
+        pre: function(scope, element, attrs) {
+          var attributes;
+          attributes = ['submit', 'button', 'reset'];
+          if (!(attrs != null ? attrs.type : void 0)) {
+            element.attr('type', 'button');
           }
-        });
-        template = "<button " + attrsStr + " class=\"ssl-button\">\n  <placeholder></placeholder>\n</button>";
-        templateEl = angular.element(template);
-        transclude(scope, function(clonedContent) {
-          templateEl.find("placeholder").replaceWith(clonedContent);
-          return $compile(templateEl)(scope, function(clonedTemplate) {
-            return element.replaceWith(clonedTemplate);
-          });
-        });
-        return scope.onSubmit = function() {
-          return scope.$parent[scope.$parent.parentForm].$submitted = true;
-        };
+          if (!attributes.includes(attrs.type)) {
+            return attrs.type = 'button';
+          }
+        }
       }
     };
   };
-  sslButtonDirective.$inject = ['$compile', 'seesawCommon'];
+  sslButtonDirective.$inject = [];
   return angular.module('ngSeesawLabs').directive('seesawButton', sslButtonDirective);
 })();
 
@@ -110,7 +95,8 @@
             if (firstInvalid) {
               e.stopImmediatePropagation();
               e.preventDefault();
-              return firstInvalid.focus();
+              firstInvalid.focus();
+              element.addClass('submitted');
             }
           });
         }
