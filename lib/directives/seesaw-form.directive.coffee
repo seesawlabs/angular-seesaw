@@ -1,7 +1,7 @@
 'use strict'
 
 do ->
-  sslFormDirective = ($compile)->
+  sslFormDirective = ->
     templateUrl: 'modules/seesawlabs/views/directives/ssl-form.view.html'
     transclude: true
     replace: true
@@ -21,7 +21,7 @@ do ->
             return
 
 
-  sslFormDirective.$inject = ['$compile']
+  sslFormDirective.$inject = []
 
   angular.module 'ngSeesawLabs'
     .directive 'seesawForm', sslFormDirective
