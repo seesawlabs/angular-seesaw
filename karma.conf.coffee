@@ -36,7 +36,6 @@ module.exports = (config) ->
       'lib/**/*.coffee': ['coffee', 'coverage']
       'test/**/*.coffee': ['coffee']
       'lib/**/*.jade': ['ng-jade2js']
-      'lib/**/*.html':['ng-html2js']
 
     ngJade2JsPreprocessor:
       stripPrefix: 'lib/'

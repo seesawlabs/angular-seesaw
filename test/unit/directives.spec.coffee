@@ -1,10 +1,11 @@
 describe 'Seesaw Labs Directives', ->
-  
+
   describe 'setup', ->
     $scope = $compile = null
 
     beforeEach module('ngSeesawLabs')
 
+    # Load all templates
     beforeEach module('allviews')
 
     beforeEach inject (_$rootScope_, _$compile_, $injector)->
