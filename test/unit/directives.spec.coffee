@@ -1,5 +1,5 @@
 describe 'Seesaw Labs Directives', ->
-  $httpBackend = null
+  
   describe 'setup', ->
     $scope = $compile = null
 
