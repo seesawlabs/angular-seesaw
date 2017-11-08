@@ -63,18 +63,17 @@ gulp.task 'watch', ->
 
   gulp.start('test-dev')
 
-gulp.task 'test', (cb)->
-  runKarma karmaConfFile,
-    autoWatch: false
-    singleRun: true
-    browsers: ['PhantomJS']
-  , cb
-  return
-
 gulp.task 'test-dev', (cb)->
   runKarma karmaConfFile,
     autoWatch: true
     singleRun: false
+  , cb
+  return
+
+gulp.task 'test', (cb)->
+  runKarma karmaConfFile,
+    autoWatch: false
+    singleRun: true
   , cb
   return
 

@@ -1,15 +1,15 @@
 describe 'Seesaw Labs Directives', ->
-
+  $httpBackend = null
   describe 'setup', ->
     $scope = $compile = null
 
     beforeEach module('ngSeesawLabs')
 
-    beforeEach inject (_$rootScope_, _$compile_)->
+    beforeEach module('allviews')
+
+    beforeEach inject (_$rootScope_, _$compile_, $injector)->
       $scope = _$rootScope_
       $compile = _$compile_
-
-      return
 
     compile = (markup)->
       el = $compile(angular.element(markup))($scope)
@@ -37,7 +37,7 @@ describe 'Seesaw Labs Directives', ->
       expect(el.attr('type')).toEqual('submit')
 
       # Test with other types
-      html = "<div><seesaw-button type='submitttt'>Cancel</seesaw-button></div>"
+      html = "<div><seesaw-button>Cancel</seesaw-button></div>"
       el = compile html
       el = el.find 'button'
 

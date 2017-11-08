@@ -20,6 +20,9 @@ module.exports = (config) ->
         'bower_components/angular-cookies/angular-cookies.js'
         'lib/**/*.coffee'
         'test/unit/*.spec.coffee'
+
+        # include the directory where directive templates are stored.
+        'lib/views/**/*.jade'
     ]
 
 
@@ -32,6 +35,13 @@ module.exports = (config) ->
     preprocessors:
       'lib/**/*.coffee': ['coffee', 'coverage']
       'test/**/*.coffee': ['coffee']
+      'lib/**/*.jade': ['ng-jade2js']
+      'lib/**/*.html':['ng-html2js']
+
+    ngJade2JsPreprocessor:
+      stripPrefix: 'lib/'
+      prependPrefix: 'modules/seesawlabs/'
+      moduleName: 'allviews'
 
     coffeePreprocessor:
       options:
