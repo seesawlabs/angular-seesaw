@@ -1,0 +1,9 @@
+.pmbb-edit(draggable="true")
+  .modal-header
+    div.pull-left
+      h3.modal-title 
+        span.text-capitalize(ng-bind="vm.data.addLabel")
+
+  .modal-body
+    .row
+      .col-sm-12(ng-include="vm.data.formTemplateUrl")

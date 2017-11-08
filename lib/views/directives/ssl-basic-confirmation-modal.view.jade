@@ -1,0 +1,10 @@
+seesaw-form(name="confirmationForm" data-ng-submit="modalCtrl.save(true)" draggable="true")
+  .modal-header    
+   
+  .modal-body
+    alert(type="danger")
+      span(ng-bind="modalCtrl.confirmationMessage || 'Are you sure?'")
+
+  .modal-footer
+    seesaw-button.btn.btn-link(data-ng-click="modalCtrl.cancel()") No
+    seesaw-button.btn.btn-primary(type="submit") Yes

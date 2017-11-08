@@ -43,3 +43,15 @@ describe 'Seesaw Labs Directives', ->
       el = el.find 'button'
 
       expect(el.attr('type')).toEqual('button')
+
+    it 'input directive', ->
+
+    it 'form directive', ->
+
+    it 'suggestions directive', ->
+
+    it 'confirm directive', ->
+
+    it 'facets directive', ->
+
+    it 'back directive', ->

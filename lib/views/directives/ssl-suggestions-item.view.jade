@@ -1,0 +1,6 @@
+div
+  strong 
+    span {{$item.id && $item.id + ' - ' || ''}}
+    span(ng-bind="$item.name || 'Name not specified'")
+  br 
+  small(ng-bind="$item.description | limitTo:60 || 'Description not specified'")
