@@ -128,6 +128,9 @@ gulp.task 'update', ->
     gulp.src './dist/*.js'
       .pipe gulp.dest(path)
 
+    gulp.src './lib/views/**/*.jade'
+      .pipe gulp.dest("#{dir}/src/modules/seesawlabs/views/")
+
     console.log path
 
 gulp.task 'distribute', ->
