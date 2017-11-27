@@ -143,6 +143,34 @@
 })();
 
 'use strict';
+(function() {
+  var sslPictureDirective;
+  sslPictureDirective = function() {
+    return {
+      templateUrl: 'modules/seesawlabs/views/directives/ssl-picture.view.html',
+      replace: true,
+      scope: {
+        logoUrl: '=',
+        logoUuid: '=',
+        editMode: '=',
+        defaultUrl: '@'
+      },
+      link: {
+        pre: function(scope, element, attrs) {
+          scope.editMode = false;
+          return scope.removeLogo = function() {
+            scope.logoUrl = null;
+            return scope.logoUuid = '';
+          };
+        }
+      }
+    };
+  };
+  sslPictureDirective.$inject = [];
+  return angular.module('ngSeesawLabs').directive('seesawPicture', sslPictureDirective);
+})();
+
+'use strict';
 (function(angular) {
   var seesawCommon;
   seesawCommon = function() {
