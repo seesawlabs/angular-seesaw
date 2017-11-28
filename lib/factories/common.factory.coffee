@@ -14,9 +14,6 @@ do (angular)->
       result = input.replace(/([A-Z])/g, '-$1')
       result.toLowerCase()
 
-    contains: (item, items)->
-      items.includes(item)
-
   seesawCommon.$inject = []
 
   angular.module 'ngSeesawLabs'
