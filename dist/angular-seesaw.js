@@ -171,6 +171,30 @@
 })();
 
 'use strict';
+(function() {
+  var sslStatusDirective;
+  sslStatusDirective = function() {
+    return {
+      templateUrl: 'modules/seesawlabs/views/directives/ssl-status.view.html',
+      replace: true,
+      scope: {
+        status: '=',
+        label: '='
+      },
+      link: {
+        pre: function(scope, element, attrs) {
+          if (scope.status != null) {
+            return scope.status = scope.status.toLowerCase();
+          }
+        }
+      }
+    };
+  };
+  sslStatusDirective.$inject = [];
+  return angular.module('ngSeesawLabs').directive('seesawStatus', sslStatusDirective);
+})();
+
+'use strict';
 (function(angular) {
   var seesawCommon;
   seesawCommon = function() {
