@@ -49,6 +49,7 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "mocha": "^2.3.3",
     "phantomjs": "^1.9.18",
-    "protractor": "^2.5.1"
+    "protractor": "^2.5.1",
+    "karma-ng-jade2js-preprocessor": "~0.2"
   }
 }

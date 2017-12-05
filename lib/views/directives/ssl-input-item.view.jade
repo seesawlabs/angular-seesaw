@@ -1,0 +1,15 @@
+.form-group.ssl-input-item(ng-class="{'ng-error': !isEmpty(parentForm[ref].$error)}")
+  label.control-label(ng-bind="label" ng-if="label")
+  .ng-transclude
+  .input-error.hide(ng-messages="parentForm[ref].$error" multiple ng-if="!isEmpty(parentForm[ref].$error)" role="alert")
+    .error(ng-message="date") {{ dateMessage || (label + ' needs to be a valid date') }}
+    .error(ng-message="required") {{ requiredMessage || (label + ' is required') }}
+    .error(ng-message="number") {{ numberMessage || (label + ' is not a valid number!') }}
+    .error(ng-message="min") {{ minMessage || (label + 'is is too short') }}
+    .error(ng-message="max") {{ maxMessage || (label + 'is is too long') }}
+    .error(ng-message="email") {{ emailMessage || (label + ' needs to be a valid email') }}
+    .error(ng-message="pattern") {{ patternMessage || (label + ' pattern is invalid') }}
+    .error(ng-message="maxlength") {{ maxlengthMessage || (label + ' maxlength is invalid') }}
+    .error(ng-message="minlength") {{ minlengthMessage || (label + ' minlength is invalid') }}
+    .error(ng-message="kPasswordMatch") Passwords do not match
+    .error(ng-message="email_unavailable") Email not available
