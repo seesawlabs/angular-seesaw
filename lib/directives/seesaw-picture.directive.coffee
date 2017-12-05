@@ -7,11 +7,11 @@ do ->
     scope:
       logoUrl: '='
       logoUuid: '='
-      editMode: '='
+      editMode: '@'
       defaultUrl: '@'
     link:
       pre: (scope, element, attrs)->
-        scope.editMode = false
+        scope.editMode = false if not scope.editMode?
         scope.removeLogo = ->
           scope.logoUrl = null
           scope.logoUuid = ''
