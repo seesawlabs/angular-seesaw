@@ -152,12 +152,14 @@
       scope: {
         logoUrl: '=',
         logoUuid: '=',
-        editMode: '=',
+        editMode: '@',
         defaultUrl: '@'
       },
       link: {
         pre: function(scope, element, attrs) {
-          scope.editMode = false;
+          if (scope.editMode == null) {
+            scope.editMode = false;
+          }
           return scope.removeLogo = function() {
             scope.logoUrl = null;
             return scope.logoUuid = '';
