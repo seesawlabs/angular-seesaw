@@ -3,24 +3,28 @@
 do ->
   sslInModalDirective = ($uibModal)->
     scope:
-      seesawInModal: '&'
+      seesawInModal: '='
+      #seesawModel: '='
     link: (scope, element, attrs)->
       openModal = ->
+        data = scope.seesawInModal
         modalInstance = $uibModal.open
           animation: true
           templateUrl: attrs.seesawInModalTemplateUrl
           controller: attrs.seesawInModalController
           size: attrs.seesawInModalSize || ''
           resolve:
-            scope.resolve
+            modaldata: => data
 
       # Bind to click event
       element.bind 'click', (e)->
         openModal()
           .result.then =>
-            scope.seesawInModal()
+            #console.log "then modal"
+            # Confirm
+            #scope.seesawInModal()
           #.catch =>
-          #  scope.kConfirmCancel() if scope.kConfirmCancel
+          #  scope.cancel() if scope.cancel
         e.stopPropagation();
 
   sslInModalDirective.$inject = ['$uibModal']
