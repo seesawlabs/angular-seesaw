@@ -12,7 +12,7 @@ do (angular)->
       promise: '&'
       options: '='
       showCollapse: '@'
-      collapseText: '='
+      collapseTextProperty: '@'
     link:
       pre: (scope, element, attrs)->
         scope.showCollapse = false if not scope.showCollapse?
@@ -61,5 +61,4 @@ do (angular)->
   sslEntityListDirective.$inject = ['$compile', '$filter', 'NgTableParams']
 
   angular.module 'ngSeesawLabs'
-    #.controller 'seesawEntityListCtrl', seesawEntityListCtrl
     .directive 'seesawEntityList', sslEntityListDirective
