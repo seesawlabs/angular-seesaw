@@ -27,11 +27,13 @@ do (angular)->
         scope.onAction = (option, item)->
           option.action(item)
             .then (res)=>
-              @refresh() if option.refresh or option.action is 'delete'
+              if option.refresh or option.name is 'delete'
+                scope.refresh()
 
         scope.refresh = ->
           if scope.tableParams
             scope.tableParams.reload()
+            return
 
           scope.tableParams = new NgTableParams scope.tableOptions,
             counts: []
