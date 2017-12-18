@@ -49,9 +49,11 @@ do (angular)->
                   params.total(0)
                   null
 
-        scope.getValue = (item, name)->
+        scope.getValue = (item, name, filter = null)->
           return '' if not name
           res = eval("item.#{name}")
+          if filter?.name
+            res = $filter(filter.name)(res, filter.expression, filter.comparator, filter.anyPropertyKey)
           res
 
         scope.doClick = (item)->
