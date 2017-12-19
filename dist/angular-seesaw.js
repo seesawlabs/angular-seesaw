@@ -230,7 +230,8 @@ BaseCtrl = (function() {
         promise: '&',
         options: '=',
         showCollapse: '@',
-        collapseTextProperty: '@'
+        collapseTextProperty: '@',
+        reference: '='
       },
       link: {
         pre: function(scope, element, attrs) {
@@ -245,6 +246,17 @@ BaseCtrl = (function() {
               id: "desc"
             },
             count: 100
+          };
+          scope.getItem = function(item, reference) {
+            var res;
+            if (reference == null) {
+              return item;
+            }
+            res = {
+              item: item,
+              ref: reference
+            };
+            return res;
           };
           scope.onAction = function(option, item) {
             return option.action(item).then((function(_this) {
@@ -282,10 +294,14 @@ BaseCtrl = (function() {
             if (filter == null) {
               filter = null;
             }
-            if (!name) {
+            if ((item == null) || (name == null)) {
               return '';
             }
-            res = eval("item." + name);
+            try {
+              res = eval("item." + name);
+            } catch (error) {
+              return '';
+            }
             if (filter != null ? filter.name : void 0) {
               res = $filter(filter.name)(res, filter.expression, filter.comparator, filter.anyPropertyKey);
             }
