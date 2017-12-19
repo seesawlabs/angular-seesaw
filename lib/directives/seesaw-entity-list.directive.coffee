@@ -13,6 +13,7 @@ do (angular)->
       options: '='
       showCollapse: '@'
       collapseTextProperty: '@'
+      reference: '='
     link:
       pre: (scope, element, attrs)->
         scope.showCollapse = false if not scope.showCollapse?
@@ -23,6 +24,13 @@ do (angular)->
           sorting:
             id: "desc"
           count: 100
+
+        scope.getItem = (item, reference)->
+          return item if not reference?
+          res =
+            item: item
+            ref: reference
+          res
 
         scope.onAction = (option, item)->
           option.action(item)
@@ -50,10 +58,13 @@ do (angular)->
                   null
 
         scope.getValue = (item, name, filter = null)->
-          return '' if not name
-          res = eval("item.#{name}")
-          if filter?.name
-            res = $filter(filter.name)(res, filter.expression, filter.comparator, filter.anyPropertyKey)
+          return '' if not item? or not name?
+          try
+            res = eval("item.#{name}")
+          catch
+            return ''
+
+          res = $filter(filter.name)(res, filter.expression, filter.comparator, filter.anyPropertyKey) if filter?.name
           res
 
         scope.doClick = (item)->
