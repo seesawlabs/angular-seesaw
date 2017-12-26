@@ -240,7 +240,6 @@ BaseCtrl = (function() {
           }
           scope.details = {};
           scope.loading = false;
-          scope.items = [];
           scope.tableOptions = {
             sorting: {
               id: "desc"
@@ -277,11 +276,11 @@ BaseCtrl = (function() {
               getData: function(params) {
                 return scope.promise().then(function(response) {
                   var records;
-                  scope.items = response;
                   scope.loading = false;
                   records = params.filter() ? $filter('filter')(response, params.filter(), false) : response;
                   records = params.sorting() ? $filter('orderBy')(records, params.orderBy()) : records;
-                  return params.total(records.length);
+                  params.total(records.length);
+                  return records.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 })["catch"](function(err) {
                   params.total(0);
                   return null;
