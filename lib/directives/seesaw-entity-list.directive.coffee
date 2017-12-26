@@ -19,7 +19,6 @@ do (angular)->
         scope.showCollapse = false if not scope.showCollapse?
         scope.details = {}
         scope.loading = false
-        scope.items = []
         scope.tableOptions =
           sorting:
             id: "desc"
