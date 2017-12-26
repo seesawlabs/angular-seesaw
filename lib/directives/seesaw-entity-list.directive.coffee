@@ -48,11 +48,11 @@ do (angular)->
             getData: (params)->
               scope.promise()
                 .then (response) ->
-                  scope.items = response
                   scope.loading = false
                   records = if params.filter() then $filter('filter')(response, params.filter(), false) else response
                   records = if params.sorting() then $filter('orderBy')(records, params.orderBy()) else records
                   params.total(records.length)
+                  records.slice((params.page() - 1) * params.count(), params.page() * params.count())
                 .catch (err)->
                   params.total(0)
                   null
