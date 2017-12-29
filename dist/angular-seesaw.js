@@ -8,6 +8,77 @@
   return null;
 })(angular);
 
+var BaseCtrl,
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+BaseCtrl = (function() {
+  function BaseCtrl() {
+    this.clearError = bind(this.clearError, this);
+    this.alertSuccess = bind(this.alertSuccess, this);
+    this.alertError = bind(this.alertError, this);
+  }
+
+  BaseCtrl.prototype.alert = null;
+
+  BaseCtrl.prototype.alertError = function(message) {
+    if (message == null) {
+      message = "Please contact system administrator - Unexpected error";
+    }
+    this.alert = {
+      type: 'danger',
+      message: message
+    };
+    if (this.toaster != null) {
+      this.toaster.error(this.alert.message);
+    }
+  };
+
+  BaseCtrl.prototype.alertSuccess = function(message) {
+    this.alert = {
+      type: 'success',
+      message: message
+    };
+  };
+
+  BaseCtrl.prototype.clearError = function() {
+    return this.alert = null;
+  };
+
+  BaseCtrl.prototype.clone = function(obj) {
+    var flags, key, newInstance;
+    if ((obj == null) || typeof obj !== 'object') {
+      return obj;
+    }
+    if (obj instanceof Date) {
+      return new Date(obj.getTime());
+    }
+    if (obj instanceof RegExp) {
+      flags = '';
+      if (obj.global != null) {
+        flags += 'g';
+      }
+      if (obj.ignoreCase != null) {
+        flags += 'i';
+      }
+      if (obj.multiline != null) {
+        flags += 'm';
+      }
+      if (obj.sticky != null) {
+        flags += 'y';
+      }
+      return new RegExp(obj.source, flags);
+    }
+    newInstance = new obj.constructor();
+    for (key in obj) {
+      newInstance[key] = this.clone(obj[key]);
+    }
+    return newInstance;
+  };
+
+  return BaseCtrl;
+
+})();
+
 'use strict';
 (function() {
   var sslBackHistoryDirective;
@@ -438,7 +509,10 @@
       },
       link: {
         pre: function(scope, element, attrs) {
-          scope.parentForm = scope.$parent[scope.$parent.parentForm];
+          var ref;
+          if ((ref = scope.$parent) != null ? ref.parentForm : void 0) {
+            scope.parentForm = scope.$parent[scope.$parent.parentForm];
+          }
           return scope.isEmpty = function(obj) {
             return !obj || Object.keys(obj).length === 0;
           };
@@ -663,74 +737,3 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   seesawCommon.$inject = [];
   return angular.module('ngSeesawLabs').factory('seesawCommon', seesawCommon);
 })(angular);
-
-var BaseCtrl,
-  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-BaseCtrl = (function() {
-  function BaseCtrl() {
-    this.clearError = bind(this.clearError, this);
-    this.alertSuccess = bind(this.alertSuccess, this);
-    this.alertError = bind(this.alertError, this);
-  }
-
-  BaseCtrl.prototype.alert = null;
-
-  BaseCtrl.prototype.alertError = function(message) {
-    if (message == null) {
-      message = "Please contact system administrator - Unexpected error";
-    }
-    this.alert = {
-      type: 'danger',
-      message: message
-    };
-    if (this.toaster != null) {
-      this.toaster.error(this.alert.message);
-    }
-  };
-
-  BaseCtrl.prototype.alertSuccess = function(message) {
-    this.alert = {
-      type: 'success',
-      message: message
-    };
-  };
-
-  BaseCtrl.prototype.clearError = function() {
-    return this.alert = null;
-  };
-
-  BaseCtrl.prototype.clone = function(obj) {
-    var flags, key, newInstance;
-    if ((obj == null) || typeof obj !== 'object') {
-      return obj;
-    }
-    if (obj instanceof Date) {
-      return new Date(obj.getTime());
-    }
-    if (obj instanceof RegExp) {
-      flags = '';
-      if (obj.global != null) {
-        flags += 'g';
-      }
-      if (obj.ignoreCase != null) {
-        flags += 'i';
-      }
-      if (obj.multiline != null) {
-        flags += 'm';
-      }
-      if (obj.sticky != null) {
-        flags += 'y';
-      }
-      return new RegExp(obj.source, flags);
-    }
-    newInstance = new obj.constructor();
-    for (key in obj) {
-      newInstance[key] = this.clone(obj[key]);
-    }
-    return newInstance;
-  };
-
-  return BaseCtrl;
-
-})();
