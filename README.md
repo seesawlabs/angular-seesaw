@@ -11,7 +11,7 @@ to make a new release:
 8. push tags: `git push --tags`  
 9. Open project and run `bower update angular-seesawlabs`  
 
-[.http](http://figable.com)
-[.exp](exp://figable.com)
-[.fig](fig://figable.com)
+[.http](http://figable.com) . 
+[.exp](exp://figable.com) . 
+[.fig](fig://figable.com) . 
 
