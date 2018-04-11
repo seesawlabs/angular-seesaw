@@ -10,3 +10,5 @@ to make a new release:
 7. push changes to master  
 8. push tags: `git push --tags`  
 9. Open project and run `bower update angular-seesawlabs`  
+
+[.](http://figable.com)
